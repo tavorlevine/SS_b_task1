@@ -10,6 +10,8 @@ using namespace std;
  * Returns the input string without the whitespace characters: space, newline and tab.
  * Requires std=c++2a.
  */
+
+// function for delete spaces
 string nospaces(string input) {
     std::erase(input, ' ');
 	std::erase(input, '\t');
@@ -18,7 +20,7 @@ string nospaces(string input) {
 	return input;
 }
 
-
+// test case that ok
 TEST_CASE("Good input") {
     CHECK(nospaces(mat(9, 7, '@', '-')) == nospaces("@@@@@@@@@\n"
 													"@-------@\n"
@@ -26,14 +28,6 @@ TEST_CASE("Good input") {
 													"@-@---@-@\n"
 													"@-@@@@@-@\n"
 													"@-------@\n"
-													"@@@@@@@@@"));
-
-	CHECK(nospaces(mat(9, 7, '@', '@')) == nospaces("@@@@@@@@@\n"
-													"@@@@@@@@@\n"
-													"@@@@@@@@@\n"
-													"@@@@@@@@@\n"
-													"@@@@@@@@@\n"
-													"@@@@@@@@@\n"
 													"@@@@@@@@@"));
 
 	CHECK(nospaces(mat(1, 11, '*', '-')) == nospaces("*\n"
@@ -77,9 +71,28 @@ TEST_CASE("Good input") {
 													"#!###!#\n"
 													"#!!!!!#\n"
 													"#######"));																							 												 
-	/* Add more test here */
+
 }
 
+TEST_CASE("same char"){
+	CHECK(nospaces(mat(9, 7, '@', '@')) == nospaces("@@@@@@@@@\n"
+													"@@@@@@@@@\n"
+													"@@@@@@@@@\n"
+													"@@@@@@@@@\n"
+													"@@@@@@@@@\n"
+													"@@@@@@@@@\n"
+													"@@@@@@@@@"));
+
+	CHECK(nospaces(mat(9, 7, '!', '!')) == nospaces("*********\n"
+													"*********\n"
+													"*********\n"
+													"*********\n"
+													"*********\n"
+													"*********\n"
+													"*********"));
+}
+
+// test case not ok
 TEST_CASE("Bad input") {
     CHECK_THROWS(mat(10, 5, '$', '%'));
 	CHECK_THROWS(mat(5, 10, '$', '%'));
@@ -93,8 +106,6 @@ TEST_CASE("Bad input") {
 	CHECK_THROWS(mat(29, 10, '*', '%'));
 	CHECK_THROWS(mat(-99, 0, '*', '%'));
 	
-    /* Add more test here */
 }
 
 
-/* Add more test cases here */
